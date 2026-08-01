@@ -2,6 +2,8 @@ import express from "express";
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { db_connect } from "./configs/db";
+import errorHandler from "./middlewares/errorMiddleware";
+import routes from "./routes";
 
 dotenv.config();
 
@@ -12,10 +14,10 @@ app.use(cors());
 app.use(express.json());
 
 //routes
-
+app.use('/', routes);
 
 //middlewares
-
+app.use(errorHandler);
 
 (async () => {
     await db_connect();
